@@ -2,7 +2,7 @@
 <h1>New Employee</h1>
 
 <div>
-<%= form_for @user do |f| %>
+<%= form_for @user, url: users_path do |f| %>
 
 <% if @user.errors.any? %>
 <div id="error_explanation">
@@ -35,7 +35,7 @@
 
 <p>
 	<%= f.label :Salary %><br>
-	<%= f.text_field :encrypted_salary %>
+	<%= f.text_field :salary %>
 </p>
 
 <p>

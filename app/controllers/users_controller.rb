@@ -1,12 +1,8 @@
 class UsersController < ApplicationController
 
-	before_action :get_user, only: [ :show, :update, :destroy ]
+	before_action :get_user, only: [ :update, :destroy ]
 
 	def index
-		
-	end
-
-	def show
 		
 	end
 
@@ -28,8 +24,10 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.new(user_params)
-		User.invite!(user_params[:email])
+		password = SecureRandom.hex(4)
+		@user.password = password
 		if @user.save
+			UserMailer.welcome_email(@user,password).deliver
 			redirect_to dashboard_path
 		else
 			render 'new'
@@ -69,7 +67,7 @@ class UsersController < ApplicationController
 		end
 
 		def user_params
-			params.require( :user ).permit( :first_name, :last_name, :email, :contact_no, :encrypted_salary )
+			params.require( :user ).permit( :first_name, :last_name, :email, :contact_no, :salary )
 		end
 
 end

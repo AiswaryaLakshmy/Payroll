@@ -13,7 +13,7 @@
 		<th>Email</th>&nbsp;&nbsp;
 		<th>Contact number</th>&nbsp;&nbsp;
 		<% if current_user.admin? %>
-			<th>Salary</th>
+			<th>Salary(Rs.)</th>
 		<% end %>
 		<th colspan="4"></th>
 	</tr>
@@ -24,16 +24,35 @@
 		<td><%= user.last_name %></td>
 		<td><%= user.email %></td>
 		<td><%= user.contact_no %></td>
-		<!-- <td><%#= link_to 'Show', article_path(article) %></td> -->
+		
 		<% if current_user.admin? %>
-			<td><%= user.encrypted_salary %></td>
-			<td><%= link_to 'Generate Pay Slip' %></td>
+			<td><%= user.salary %></td>
+			<td><%= link_to 'Generate Pay Slip', pay_slip_path %></td>
 			<td><%= link_to 'Edit', edit_user_path(user) %></td>
 			<td><%= link_to 'Destroy', user_path(user), method: :delete,
               method: :delete,
               data: { confirm: 'Are you sure?' } %></td>
         <% end %>
+        
 	</tr>
 	<% end %>	
 
-</table>
+</table><br><br>
+
+<% if current_user.user? %>
+	<%= current_user.first_name %>'s salary(Rs.):&nbsp; <%= current_user.salary %>
+<% end %>
+
+<!-- <script>
+    $(document).ready(function(){
+      $('#medication_drug_id').change(function(){
+        a = $(this).val()
+        if ( a == '' ){
+          $('#medication_custom').prop('disabled', false);
+        }
+        else {
+          $('#medication_custom').prop('disabled', true);
+        }
+      })
+    })
+</script> -->
