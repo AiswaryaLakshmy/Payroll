@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-	before_action :get_user, only: [ :update, :destroy ]
+	before_action :get_user, only: [ :update, :destroy, :pay_slip ]
 
 	def index
 		
@@ -57,7 +57,25 @@ class UsersController < ApplicationController
 	end
 
 	def pay_slip
-		
+		@salary = @user.salary.to_i
+		@bs = @salary * 70 / 100
+		@hra = @salary * 35 / 100
+		@c = @salary * 15 / 100
+		@esi = @salary * 6 / 100
+		@pf = @salary * 14 / 100
+		@te = @bs + @hra + @c
+		@td = @esi + @pf
+		@ns = @te - @td
+
+		# respond_to do |format|
+	 #    # format.html
+	 #    format.pdf do
+	 #      render pdf: "users/pay_slip", layout: 'pdf'   # Excluding ".pdf" extension.
+	 #    end
+	 #  end
+
+		render pdf: 'pay_slip', layout: 'pdf'
+
 	end
 
 	private
@@ -71,4 +89,3 @@ class UsersController < ApplicationController
 		end
 
 end
-

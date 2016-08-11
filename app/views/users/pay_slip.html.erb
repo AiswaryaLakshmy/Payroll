@@ -1,8 +1,57 @@
-<h1 align="center">7 Nodes Salary Slip</h1>
+<br><br>
+<h1 align="center"><ins>7 Nodes Salary Slip</ins></h1>
 
+<p><strong>Employee Name:</strong> <%= @user.first_name %> <%= @user.last_name %></p>
+<table style="width:70%">
 
+<p>Month and year: ______________________</p> 
+	<tr>
+    <th>Earnings: </th>
+    <th> </th>
+  </tr>
+  <tr>
+    <td>Basic and DA:</td>
+    <td><%= @bs %></td>
+  </tr>
+  <tr>
+    <td>HRA: </td>
+    <td><%= @hra %> </td>
+  </tr>
+  <tr>
+    <td>Conveyance: </td>
+    <td><%= @c %></td>
+  </tr>
+  <tr>
+    <th>Deductions: </th>
+    <th> </th>
+  </tr>
+  <tr>
+    <td>ESI: </_td>
+    <td><%= @esi %> </td>
+  </tr>
+   <tr>
+    <td>Provident Fund: </td>
+    <td><%= @pf %></td>
+  </tr>
+   <tr>
+    <th>Total Earnings: </th>
+    <td><%= @te %></td>
+  </tr>
+  <tr>
+    <th>Total Deductions: </th>
+    <td><%= @td %></td>
+  </tr>
+  <tr>
+    <th>Net Salary: </th>
+    <th><%= @ns %></th>
+  </tr>
+</table>
+<br>
+<p>Cheque No:___________________&nbsp;&nbsp;&nbsp;Name of Bank: ________________</p><br>
+<p>Date: _______________________</p>
+<br>
+<p>Signature of employee: __________________&nbsp;&nbsp;&nbsp;Director: ________________</p>
 
-
-
-<br><br><br><br><br><br><br><br><br><br><br><br>
-	<%= link_to 'Back', :back %>
+<!-- <p> Net Salary: <%#= @ns %> -->
+<!-- <br><br><br><br><br><br><br><br><br><br><br><br>
+	<%#= link_to 'Back', :back %> -->

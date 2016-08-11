@@ -6,7 +6,7 @@
 
 <h1>Employee List</h1>
 
-<table>
+<table style="width:80%">
 	<tr>
 		<th>First Name</th>&nbsp;&nbsp;
 		<th>Last Name</th>&nbsp;&nbsp;
@@ -27,7 +27,7 @@
 		
 		<% if current_user.admin? %>
 			<td><%= user.salary %></td>
-			<td><%= link_to 'Generate Pay Slip', pay_slip_path %></td>
+			<td><%= link_to 'Generate Pay Slip', pay_slip_user_path(user) %></td>
 			<td><%= link_to 'Edit', edit_user_path(user) %></td>
 			<td><%= link_to 'Destroy', user_path(user), method: :delete,
               method: :delete,
