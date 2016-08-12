@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-	before_action :get_user, only: [ :update, :destroy, :pay_slip ]
+	before_action :get_user, only: [ :update, :destroy, :pay_slip, :pay_slip_details ]
 
 	def index
 		
@@ -23,14 +23,18 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		@user = User.new(user_params)
-		password = SecureRandom.hex(4)
-		@user.password = password
-		if @user.save
-			UserMailer.welcome_email(@user,password).deliver
-			redirect_to dashboard_path
+		if current_user.admin?
+			@user = User.new(user_params)
+			password = SecureRandom.hex(4)
+			@user.password = password
+			if @user.save
+				UserMailer.welcome_email(@user,password).deliver
+				redirect_to dashboard_path
+			else
+				render 'new'
+			end
 		else
-			render 'new'
+			redirect_to dashboard_path
 		end
 	end
 
@@ -56,26 +60,37 @@ class UsersController < ApplicationController
 		@user = User.all
 	end
 
+	def pay_slip_details
+		unless current_user.admin?
+			redirect_to dashboard_path
+		end
+	end
+
 	def pay_slip
-		@salary = @user.salary.to_i
-		@bs = @salary * 70 / 100
-		@hra = @salary * 35 / 100
-		@c = @salary * 15 / 100
-		@esi = @salary * 6 / 100
-		@pf = @salary * 14 / 100
-		@te = @bs + @hra + @c
-		@td = @esi + @pf
-		@ns = @te - @td
-
-		# respond_to do |format|
-	 #    # format.html
-	 #    format.pdf do
-	 #      render pdf: "users/pay_slip", layout: 'pdf'   # Excluding ".pdf" extension.
-	 #    end
-	 #  end
-
-		render pdf: 'pay_slip', layout: 'pdf'
-
+		if current_user.admin?
+			@salary = @user.salary.to_i
+			@m = params[:month]
+			@at = params[:attendance].to_i
+			@spd = @salary / 30
+			@s = @at * @spd
+			@bs = @s * 70 / 100
+			@hra = @s * 35 / 100
+			@c = @s * 15 / 100
+			@esi = @s * 6 / 100
+			@pf = @s * 14 / 100
+			@te = @bs + @hra + @c
+			@td = @esi + @pf
+			@ns = @te - @td
+			
+			respond_to do |format|
+		    format.html
+		    format.pdf do
+		      render pdf: "pay_slip", template: 'users/pay_slip.html', layout: 'pdf'
+		    end
+		  end
+		else
+			redirect_to dashboard_path
+		end
 	end
 
 	private

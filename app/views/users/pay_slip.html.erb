@@ -1,57 +1,61 @@
-<br><br>
-<h1 align="center"><ins>7 Nodes Salary Slip</ins></h1>
-
+<br>
+<h1 align="center"><ins>7 Nodes Technologies</ins></h1>
+<h3 align="center">[Smart City, Kakkanad, Kochi]</h3>
+<h2 align="center"><ins>Pay Slip</ins></h2>
+<br>
 <p><strong>Employee Name:</strong> <%= @user.first_name %> <%= @user.last_name %></p>
-<table style="width:70%">
+<table style="width:80%">
 
-<p>Month and year: ______________________</p> 
+<p>Month and year: <%= @m %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Attendance: <%= @at %></p> 
+
 	<tr>
-    <th>Earnings: </th>
-    <th> </th>
+    <th colspan="2">Earnings: </th>
+    <th colspan="2">Deductions: </th>
   </tr>
+
   <tr>
     <td>Basic and DA:</td>
     <td><%= @bs %></td>
+    <td>ESI: </td>
+    <td><%= @esi %> </td>
   </tr>
+
   <tr>
     <td>HRA: </td>
     <td><%= @hra %> </td>
-  </tr>
-  <tr>
-    <td>Conveyance: </td>
-    <td><%= @c %></td>
-  </tr>
-  <tr>
-    <th>Deductions: </th>
-    <th> </th>
-  </tr>
-  <tr>
-    <td>ESI: </_td>
-    <td><%= @esi %> </td>
-  </tr>
-   <tr>
     <td>Provident Fund: </td>
     <td><%= @pf %></td>
   </tr>
+
+  <tr>
+    <td>Conveyance: </td>
+    <td><%= @c %></td>
+    <td> </td>
+    <td></td>
+  </tr>
+
    <tr>
     <th>Total Earnings: </th>
     <td><%= @te %></td>
-  </tr>
-  <tr>
     <th>Total Deductions: </th>
     <td><%= @td %></td>
   </tr>
+
   <tr>
-    <th>Net Salary: </th>
-    <th><%= @ns %></th>
+    <th colspan="2">Net Salary: </th>
+    <th colspan="2"><%= @ns %></th>
   </tr>
 </table>
+
+<!-- <p><strong>Total Salary (considering attendance): <%#= @s %></strong></p>
+ -->
 <br>
-<p>Cheque No:___________________&nbsp;&nbsp;&nbsp;Name of Bank: ________________</p><br>
+<p>Cheque No: ___________________&nbsp;&nbsp;&nbsp;Name of Bank: ____________________</p>
 <p>Date: _______________________</p>
 <br>
 <p>Signature of employee: __________________&nbsp;&nbsp;&nbsp;Director: ________________</p>
 
-<!-- <p> Net Salary: <%#= @ns %> -->
-<!-- <br><br><br><br><br><br><br><br><br><br><br><br>
-	<%#= link_to 'Back', :back %> -->
+<!-- <br><br><br>
+<input name="commit" type="submit" value="Save changes" />
+<br><br><br><br><br><br>
+<p><%#= link_to 'Generate pdf', pay_slip_user_path(format: :pdf) %></p> -->

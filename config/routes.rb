@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   scope "/admin" do
     resources :users do
       member do
+        get 'pay_slip_details'
+        post 'pay_slip'
         get 'pay_slip'
       end
     end

@@ -1,10 +1,18 @@
-<p><%= link_to "Logout",  destroy_user_session_path, method: :delete if user_signed_in? %></p>
+<br><br>
+<div class="page-header">
+
+<button type="button" class="btn btn-default navbar-btn">
+<%= link_to "Logout",  destroy_user_session_path, method: :delete if user_signed_in? %>
+</button>
 
 <% if current_user.admin? %>
+<button type="button" class="btn btn-default navbar-btn">
 	<%= link_to 'New Employee', new_user_path %>
+</button>
 <% end %>
 
-<h1>Employee List</h1>
+<h1 align="center"; style="color:brown">Employee List</h1>
+</div>
 
 <table style="width:80%">
 	<tr>
@@ -14,8 +22,8 @@
 		<th>Contact number</th>&nbsp;&nbsp;
 		<% if current_user.admin? %>
 			<th>Salary(Rs.)</th>
+			<th colspan="4"></th>
 		<% end %>
-		<th colspan="4"></th>
 	</tr>
 
 	<% @user.each do |user| %>
@@ -27,7 +35,7 @@
 		
 		<% if current_user.admin? %>
 			<td><%= user.salary %></td>
-			<td><%= link_to 'Generate Pay Slip', pay_slip_user_path(user) %></td>
+			<td><%= link_to 'Pay Slip', pay_slip_details_user_path(user) %></td>
 			<td><%= link_to 'Edit', edit_user_path(user) %></td>
 			<td><%= link_to 'Destroy', user_path(user), method: :delete,
               method: :delete,
@@ -42,17 +50,3 @@
 <% if current_user.user? %>
 	<%= current_user.first_name %>'s salary(Rs.):&nbsp; <%= current_user.salary %>
 <% end %>
-
-<!-- <script>
-    $(document).ready(function(){
-      $('#medication_drug_id').change(function(){
-        a = $(this).val()
-        if ( a == '' ){
-          $('#medication_custom').prop('disabled', false);
-        }
-        else {
-          $('#medication_custom').prop('disabled', true);
-        }
-      })
-    })
-</script> -->

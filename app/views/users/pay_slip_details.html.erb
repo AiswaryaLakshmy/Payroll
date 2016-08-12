@@ -1,0 +1,19 @@
+<h1>Pay Slip Details</h1><br>
+<%= form_tag pay_slip_user_path(@user, format: :pdf) do %>
+
+<p>
+	Month and year: <%= text_field_tag :month %><br>
+</p>
+
+<p>
+	Attendance (No. of days): <%= text_field_tag :attendance %><br>
+</p>
+<br><br>
+<p>
+	<%= submit_tag "Save" %>
+</p>
+<% end %>
+
+<br><br><br><br><br><br><br><br>
+<p><%= link_to 'Back', dashboard_path %>
+<!-- <p><%#= link_to 'Generate Pay Slip', pay_slip_user_path(@user, format: :pdf) %></p> -->
